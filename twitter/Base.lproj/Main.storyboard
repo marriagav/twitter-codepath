@@ -70,7 +70,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="225" id="bf5-26-xIX" customClass="TweetCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="225" id="bf5-26-xIX" customClass="TweetCell">
                                         <rect key="frame" x="0.0" y="44.5" width="375" height="225"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bf5-26-xIX" id="2y2-yR-Mco">
@@ -159,6 +159,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentOutlet" destination="ywa-6M-baB" id="rAp-GE-h36"/>
                                             <outlet property="dateOutlet" destination="8oa-CO-soG" id="jJ9-Zc-AZi"/>
                                             <outlet property="likeButtonOutlet" destination="LFj-Ek-dDO" id="bST-eh-s3g"/>
                                             <outlet property="nameOutlet" destination="zFU-lP-xpJ" id="cUf-y7-71w"/>
@@ -194,6 +195,9 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="_tableView" destination="n9h-95-Jgi" id="fHT-F3-cp5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,4 +10,6 @@
 
 @interface TimelineViewController : UIViewController
 
+@property (strong, nonatomic) NSArray* tweetsArray;
+
 @end
