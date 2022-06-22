@@ -121,6 +121,9 @@
                                                     <color key="tintColor" systemColor="secondaryLabelColor"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="retweet-icon" title=" "/>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="bf5-26-xIX" eventType="touchUpInside" id="zIL-Nz-Wv3"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0/0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oa-CO-soG">
                                                     <rect key="frame" x="209.66666666666666" y="11" width="33.333333333333343" height="17"/>
@@ -146,6 +149,9 @@
                                                     <color key="tintColor" systemColor="secondaryLabelColor"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="favor-icon" title=" "/>
+                                                    <connections>
+                                                        <action selector="didTapFavorite:" destination="bf5-26-xIX" eventType="touchUpInside" id="6Ss-xi-xMy"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cu0-j0-fbU">
                                                     <rect key="frame" x="170" y="73" width="23.333333333333343" height="17"/>
