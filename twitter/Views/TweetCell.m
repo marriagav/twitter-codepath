@@ -8,6 +8,7 @@
 
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "QuartzCore/QuartzCore.h"
 
 @implementation TweetCell
 
@@ -33,10 +34,11 @@
     self.usernameOutlet.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.user.screenName];
     self.dateOutlet.text = self.tweet.createdAtString;
     NSString* favString = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
-    self.likeButtonOutlet.titleLabel.text = favString;
+    self.likeCount.text = favString;
     NSString* retweetString = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
-    self.retweetButtonOutlet.titleLabel.text = retweetString;
+    self.retweetCount.text = retweetString;
 
+    
     self.profilePicture.image = nil;
         if (self.tweet.user.profilePicture != nil) {
         NSString *URLString = tweet.user.profilePicture;
@@ -44,6 +46,9 @@
     //    NSData *urlData = [NSData dataWithContentsOfURL:url];
         [self.profilePicture setImageWithURL:url];
         }
+    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2;
+    self.profilePicture.layer.borderWidth = 0;
+    self.profilePicture.clipsToBounds=YES;
     };
 
 @end
