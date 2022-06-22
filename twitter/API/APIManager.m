@@ -116,7 +116,7 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
     
-    NSString *urlWithoutID = @"1.1/statuses/retweet/";
+    NSString *urlWithoutID = @"1.1/statuses/unretweet/";
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@", urlWithoutID, tweet.idStr, @".json"];
     NSDictionary *parameters = @{@"id": tweet.idStr};
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
