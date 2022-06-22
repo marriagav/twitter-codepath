@@ -9,6 +9,7 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "QuartzCore/QuartzCore.h"
+#import "APIManager.h"
 
 @implementation TweetCell
 
@@ -22,13 +23,74 @@
 
     // Configure the view for the selected state
 }
-
-- (void)setTweet:(Tweet *)tweet {
-    // Since we're replacing the default setter, we have to set the underlying private storage _movie ourselves.
-    // _movie was an automatically declared variable with the @propery declaration.
-    // You need to do this any time you create a custom setter.
-    _tweet = tweet;
+- (IBAction)didTapRetweet:(id)sender {
     
+    if (self.tweet.retweeted == NO){
+        self.tweet.retweeted = YES;
+        self.tweet.retweetCount += 1;
+        [self _refreshData];
+        
+        [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+    else {
+        self.tweet.retweeted = NO;
+        self.tweet.retweetCount -= 1;
+        [self _refreshData];
+        
+        [[APIManager shared] unretweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
+             }
+         }];
+        
+    }
+    
+}
+
+- (IBAction)didTapFavorite:(id)sender {
+    
+    if (self.tweet.favorited == NO){
+        self.tweet.favorited = YES;
+        self.tweet.favoriteCount += 1;
+        [self _refreshData];
+        
+        [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+    else {
+        self.tweet.favorited = NO;
+        self.tweet.favoriteCount -= 1;
+        [self _refreshData];
+        
+        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
+             }
+         }];
+        
+    }
+}
+
+- (void)_refreshData{
     self.nameOutlet.text = self.tweet.user.name;
     self.contentOutlet.text = self.tweet.text;
     self.usernameOutlet.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.user.screenName];
@@ -38,10 +100,9 @@
     NSString* retweetString = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
     self.retweetCount.text = retweetString;
 
-    
     self.profilePicture.image = nil;
         if (self.tweet.user.profilePicture != nil) {
-        NSString *URLString = tweet.user.profilePicture;
+        NSString *URLString = self.tweet.user.profilePicture;
         NSURL *url = [NSURL URLWithString:URLString];
     //    NSData *urlData = [NSData dataWithContentsOfURL:url];
         [self.profilePicture setImageWithURL:url];
@@ -49,7 +110,28 @@
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2;
     self.profilePicture.layer.borderWidth = 0;
     self.profilePicture.clipsToBounds=YES;
+    
+    if (self.tweet.favorited == NO){
+        [self.likeButtonOutlet setImage:[UIImage imageNamed:@"favor-icon.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [self.likeButtonOutlet setImage:[UIImage imageNamed:@"favor-icon-red.png"] forState:UIControlStateNormal];
     };
+    
+    if (self.tweet.retweeted == NO){
+        [self.retweetButtonOutlet setImage:[UIImage imageNamed:@"retweet-icon.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [self.retweetButtonOutlet setImage:[UIImage imageNamed:@"retweet-icon-green.png"] forState:UIControlStateNormal];
+    };
+    
+};
+
+- (void)setTweet:(Tweet *)tweet {
+    _tweet = tweet;
+    
+    [self _refreshData];
+};
 
 @end
 
