@@ -29,6 +29,13 @@
     self._tableView.delegate=self;
     
     // Get timeline
+    [self _getTimeline];
+    
+    // Initialize a UIRefreshControl
+    [self _initializeRefreshControl];
+}
+
+- (void)_getTimeline{
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             self.tweetsArray = tweets;
@@ -37,6 +44,12 @@
             NSLog(@"Error getting home timeline: %@", error.localizedDescription);
         }
     }];
+}
+
+- (void)_initializeRefreshControl{
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self._tableView insertSubview:refreshControl atIndex:0];
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -69,20 +82,21 @@
     Tweet *tweet = self.tweetsArray[indexPath.row];
     cell.tweet=tweet;
     
-//    cell.nameOutlet.text = tweet.user.name;
-//    cell.usernameOutlet.text = tweet.user.screenName;
-//    cell.contentOutlet.text = tweet.user
-    
-//    NSString *URLString = tweet.user.profilePicture;
-//    NSURL *url = [NSURL URLWithString:URLString];
-//    NSData *urlData = [NSData dataWithContentsOfURL:url];
-//    cell.profilePicture.image=nil;
-//    [cell.profilePicture setImageWithURL:urlData];
-    
     return cell;
 }
 
-
+// Hides the RefreshControl
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            self.tweetsArray = tweets;
+            [self._tableView reloadData];
+        } else {
+            NSLog(@"Error getting home timeline: %@", error.localizedDescription);
+        }
+        [refreshControl endRefreshing];
+    }];
+}
 
 /*
 #pragma mark - Navigation

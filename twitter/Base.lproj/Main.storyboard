@@ -84,13 +84,13 @@
                                                         <constraint firstAttribute="width" constant="60" id="kTE-Sx-On0"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-lP-xpJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-lP-xpJ">
                                                     <rect key="frame" x="84" y="11" width="40" height="17"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpn-Qq-cSC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="747" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpn-Qq-cSC">
                                                     <rect key="frame" x="126" y="11" width="75.666666666666686" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -191,7 +191,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contentOutlet" destination="ywa-6M-baB" id="rAp-GE-h36"/>
-                                            <outlet property="dateOutlet" destination="Eio-xx-cze" id="rWp-Bw-3In"/>
+                                            <outlet property="dateOutlet" destination="8oa-CO-soG" id="rfS-OI-L7O"/>
                                             <outlet property="likeButtonOutlet" destination="LFj-Ek-dDO" id="bST-eh-s3g"/>
                                             <outlet property="likeCount" destination="Eio-xx-cze" id="qhg-bg-mAD"/>
                                             <outlet property="messageOutlet" destination="7MA-eB-TeV" id="Ity-OX-k17"/>
