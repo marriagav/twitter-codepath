@@ -13,8 +13,9 @@
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *_tableView;
 
@@ -38,7 +39,7 @@
 - (void)_getTimeline{
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
-            self.tweetsArray = tweets;
+            self.tweetsArray = (NSMutableArray *)tweets;
             [self._tableView reloadData];
         } else {
             NSLog(@"Error getting home timeline: %@", error.localizedDescription);
@@ -89,7 +90,7 @@
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
-            self.tweetsArray = tweets;
+            self.tweetsArray = (NSMutableArray *)tweets;
             [self._tableView reloadData];
         } else {
             NSLog(@"Error getting home timeline: %@", error.localizedDescription);
@@ -98,15 +99,18 @@
     }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)didTweet:(Tweet *)tweet{
+    [self.tweetsArray insertObject:tweet atIndex:0];
+    [self._tableView reloadData];
 }
-*/
+
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   UINavigationController *navigationController = [segue destinationViewController];
+   ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+   composeController.delegate = self;
+}
 
 
 @end
