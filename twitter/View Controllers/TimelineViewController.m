@@ -10,12 +10,13 @@
 #import "APIManager.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "DetailsViewController.h"
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, DetailsViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *_tableView;
 
@@ -104,6 +105,15 @@
     [self._tableView reloadData];
 }
 
+- (void)didLike:(Tweet *)tweet{
+    [self._tableView reloadData];
+    
+}
+
+- (void)didRetweet:(Tweet *)tweet{
+    [self._tableView reloadData];
+}
+
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -113,7 +123,12 @@
         composeController.delegate = self;
     }
     else if ([segue.identifier isEqual:@"detailView"]){
-        
+        NSIndexPath *myIndexPath=self._tableView.indexPathForSelectedRow;
+        Tweet *tweetToPass = self.tweetsArray[myIndexPath.row];
+        UINavigationController *navigationController = [segue destinationViewController];
+        DetailsViewController *detailVC = (DetailsViewController*)navigationController.topViewController;
+        detailVC.delegate = self;
+        detailVC.tweet = tweetToPass;
     }
 
 }

@@ -208,7 +208,7 @@
                                             <outlet property="retweetCount" destination="cu0-j0-fbU" id="Jqx-iI-gGp"/>
                                             <outlet property="tweetContentOutlet" destination="ywa-6M-baB" id="XEK-WK-jo2"/>
                                             <outlet property="usernameOutlet" destination="gpn-Qq-cSC" id="EhO-Ny-8z7"/>
-                                            <segue destination="0qu-7u-bw6" kind="show" identifier="detailView" id="OPk-Xt-x7N"/>
+                                            <segue destination="0qu-7u-bw6" kind="presentation" identifier="detailView" modalPresentationStyle="fullScreen" id="OPk-Xt-x7N"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -334,6 +334,9 @@
                                         <color key="tintColor" systemColor="secondaryLabelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="favor-icon" title=" "/>
+                                        <connections>
+                                            <action selector="didTapFavorite:" destination="3iO-qn-51e" eventType="touchUpInside" id="hw9-Ak-gK8"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMx-vg-e7Y">
                                         <rect key="frame" x="151" y="278" width="32" height="26"/>
@@ -344,6 +347,9 @@
                                         <color key="tintColor" systemColor="secondaryLabelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="retweet-icon" title=" "/>
+                                        <connections>
+                                            <action selector="didTapRetweet:" destination="3iO-qn-51e" eventType="touchUpInside" id="0Ij-Bh-O49"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ie-gk-PkR">
                                         <rect key="frame" x="336" y="278" width="32" height="26"/>
@@ -364,6 +370,7 @@
                                     <constraint firstItem="hTx-zx-p9Z" firstAttribute="leading" secondItem="m5c-OT-TUG" secondAttribute="leading" id="9hO-To-Y8P"/>
                                     <constraint firstItem="XUq-QW-uMa" firstAttribute="top" secondItem="msB-da-uUJ" secondAttribute="bottom" constant="22" id="Beh-WA-g5G"/>
                                     <constraint firstItem="MMx-vg-e7Y" firstAttribute="top" secondItem="XUq-QW-uMa" secondAttribute="top" id="Dha-7V-JT5"/>
+                                    <constraint firstItem="XUV-y7-SNh" firstAttribute="trailing" secondItem="4ie-gk-PkR" secondAttribute="trailing" constant="60" id="EDS-DG-5NR"/>
                                     <constraint firstItem="eWe-Pw-SOe" firstAttribute="top" secondItem="5w5-MV-Lt0" secondAttribute="bottom" constant="7.3300000000000001" id="GQ7-Ir-4OG"/>
                                     <constraint firstItem="Lhd-ob-oNU" firstAttribute="top" secondItem="c3u-7O-lir" secondAttribute="bottom" constant="21" id="JNz-MM-gIU"/>
                                     <constraint firstItem="MMx-vg-e7Y" firstAttribute="leading" secondItem="XUq-QW-uMa" secondAttribute="trailing" constant="58" id="Kwb-ad-2D2"/>
@@ -374,6 +381,7 @@
                                     <constraint firstItem="hTx-zx-p9Z" firstAttribute="top" secondItem="m5c-OT-TUG" secondAttribute="bottom" constant="3" id="Voe-O1-5Yh"/>
                                     <constraint firstItem="XUV-y7-SNh" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lhd-ob-oNU" secondAttribute="trailing" constant="23" id="Wle-Ek-5oV"/>
                                     <constraint firstItem="c3u-7O-lir" firstAttribute="top" secondItem="XUV-y7-SNh" secondAttribute="top" constant="150" id="Ysi-SD-ZVG"/>
+                                    <constraint firstItem="4ie-gk-PkR" firstAttribute="leading" secondItem="1wQ-GO-va6" secondAttribute="trailing" constant="60" id="av4-Ui-XjS"/>
                                     <constraint firstItem="kQs-WU-10r" firstAttribute="top" secondItem="Lhd-ob-oNU" secondAttribute="bottom" constant="37" id="bXj-on-bFm"/>
                                     <constraint firstItem="XUq-QW-uMa" firstAttribute="leading" secondItem="XUV-y7-SNh" secondAttribute="leading" constant="61" id="bbo-3y-O7x"/>
                                     <constraint firstItem="Lhd-ob-oNU" firstAttribute="leading" secondItem="XUV-y7-SNh" secondAttribute="leading" constant="24" id="bsw-ve-Ugy"/>
@@ -383,7 +391,6 @@
                                     <constraint firstAttribute="trailing" secondItem="4ie-gk-PkR" secondAttribute="trailing" constant="60" id="iSf-uw-iYI"/>
                                     <constraint firstItem="5w5-MV-Lt0" firstAttribute="leading" secondItem="Lhd-ob-oNU" secondAttribute="leading" id="iiG-H4-HKH"/>
                                     <constraint firstItem="1wQ-GO-va6" firstAttribute="top" secondItem="XUq-QW-uMa" secondAttribute="top" id="kd2-oL-L5e"/>
-                                    <constraint firstItem="4ie-gk-PkR" firstAttribute="leading" secondItem="1wQ-GO-va6" secondAttribute="trailing" constant="60" id="ksM-9M-6wI"/>
                                     <constraint firstItem="msB-da-uUJ" firstAttribute="top" secondItem="Btl-4Y-K6I" secondAttribute="top" id="ojG-HR-MFp"/>
                                     <constraint firstItem="m5c-OT-TUG" firstAttribute="top" secondItem="XUV-y7-SNh" secondAttribute="top" constant="155" id="tIg-d1-Jki"/>
                                     <constraint firstItem="msB-da-uUJ" firstAttribute="leading" secondItem="Btl-4Y-K6I" secondAttribute="trailing" constant="7" id="v9s-lm-U3h"/>
@@ -401,14 +408,24 @@
                             <constraint firstItem="Uur-T8-QMg" firstAttribute="top" secondItem="neB-aj-vSt" secondAttribute="top" id="t9S-t9-1Fw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="s0y-7P-hAU"/>
+                    <navigationItem key="navigationItem" id="s0y-7P-hAU">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="back-icon" id="EsY-ZT-lJj">
+                            <connections>
+                                <action selector="closeDetail:" destination="3iO-qn-51e" id="0YD-Os-g0k"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contentOutlet" destination="Lhd-ob-oNU" id="KT9-6R-Ko6"/>
                         <outlet property="dateOutlet" destination="5w5-MV-Lt0" id="2sF-wi-MW5"/>
+                        <outlet property="likeButton" destination="1wQ-GO-va6" id="wvt-tI-wZ6"/>
                         <outlet property="nameOutlet" destination="m5c-OT-TUG" id="HqE-1j-TAr"/>
                         <outlet property="numberOfLikes" destination="Btl-4Y-K6I" id="PqY-RE-GUG"/>
                         <outlet property="numberOfRetweets" destination="eWe-Pw-SOe" id="S7I-Vf-f08"/>
                         <outlet property="profilePicture" destination="c3u-7O-lir" id="Gnj-lY-fVK"/>
+                        <outlet property="replyButton" destination="XUq-QW-uMa" id="7bh-yq-ykd"/>
+                        <outlet property="retweetButton" destination="MMx-vg-e7Y" id="XYz-zl-MRZ"/>
+                        <outlet property="shareButton" destination="4ie-gk-PkR" id="M8t-oN-LDd"/>
                         <outlet property="usernameOutlet" destination="hTx-zx-p9Z" id="Jll-eu-WtJ"/>
                     </connections>
                 </viewController>
@@ -523,6 +540,7 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="133.33332824707031" height="133.33332824707031"/>
+        <image name="back-icon" width="30" height="30"/>
         <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
