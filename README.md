@@ -10,7 +10,7 @@ The following **core** features are completed:
 
 **A user should**
 
-- [ ] See an app icon in the home screen and a styled launch screen
+- [x] See an app icon in the home screen and a styled launch screen
 - [x] Be able to log in using their Twitter account
 - [x] See at latest the latest 20 tweets for a Twitter account in a Table View
 - [x] Be able to refresh data by pulling down on the Table View
