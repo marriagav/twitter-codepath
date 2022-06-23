@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "QuartzCore/QuartzCore.h"
 #import "APIManager.h"
+#import "DateTools.h"
 
 @implementation TweetCell
 
@@ -94,22 +95,24 @@
     self.nameOutlet.text = self.tweet.user.name;
     self.contentOutlet.text = self.tweet.text;
     self.usernameOutlet.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.user.screenName];
-    self.dateOutlet.text = self.tweet.createdAtString;
-    NSString* favString = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
-    self.likeCount.text = favString;
-    NSString* retweetString = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
-    self.retweetCount.text = retweetString;
+    
+    NSDate *date = self.tweet.createdAtDate;
+    self.dateOutlet.text = date.shortTimeAgoSinceNow;
 
     self.profilePicture.image = nil;
         if (self.tweet.user.profilePicture != nil) {
         NSString *URLString = self.tweet.user.profilePicture;
         NSURL *url = [NSURL URLWithString:URLString];
-    //    NSData *urlData = [NSData dataWithContentsOfURL:url];
         [self.profilePicture setImageWithURL:url];
         }
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2;
     self.profilePicture.layer.borderWidth = 0;
     self.profilePicture.clipsToBounds=YES;
+    
+    NSString* favString = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
+    self.likeCount.text = favString;
+    NSString* retweetString = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
+    self.retweetCount.text = retweetString;
     
     if (self.tweet.favorited == NO){
         [self.likeButtonOutlet setImage:[UIImage imageNamed:@"favor-icon.png"] forState:UIControlStateNormal];
