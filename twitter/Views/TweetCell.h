@@ -1,7 +1,7 @@
 //
 //  TweetCell.h
 //  twitter
-//
+//  The tweet cell is in charge of setting its own outlets values according to the information on the twitter database through api calls
 //  Created by Miguel Arriaga Velasco on 6/20/22.
 //  Copyright © 2022 Emerson Malca. All rights reserved.
 //

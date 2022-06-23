@@ -11,6 +11,7 @@
 @implementation Tweet
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+//    Initalizes a tweet from a dictionary (json)
     self = [super init];
 
     if (self) {
@@ -19,7 +20,6 @@
         if (originalTweet != nil) {
             NSDictionary *userDictionary = dictionary[@"user"];
             self.retweetedByUser = [[User alloc] initWithDictionary:userDictionary];
-
             // Change tweet to original tweet
             dictionary = originalTweet;
         }
@@ -48,12 +48,12 @@
         self.createdAtDate = date;
         // Convert Date to String
         self.createdAtString = [formatter stringFromDate:date];
-        
     }
     return self;
 }
 
 + (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries {
+//    Class method that initalizes an array of tweets
     NSMutableArray *tweets = [NSMutableArray array];
     for (NSDictionary *dictionary in dictionaries) {
         Tweet *tweet = [[Tweet alloc] initWithDictionary:dictionary];

@@ -1,7 +1,7 @@
 //
 //  Tweet.h
 //  twitter
-//
+//  Model to represent a Tweet
 //  Created by Miguel Arriaga Velasco on 6/20/22.
 //  Copyright © 2022 Emerson Malca. All rights reserved.
 //
@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) User *user; // Contains Tweet author's name, screenname, etc.
 @property (nonatomic, strong) NSString *createdAtString; // Display date
 @property (nonatomic, strong) NSDate *createdAtDate; // Raw Date
-
 // For Retweets
 @property (nonatomic, strong) User *retweetedByUser;  // If the tweet is a retweet, this will be the user who retweeted
 

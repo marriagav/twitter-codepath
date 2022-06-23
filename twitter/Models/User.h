@@ -1,7 +1,7 @@
 //
 //  User.h
 //  twitter
-//
+//  Model to represent an User
 //  Created by Miguel Arriaga Velasco on 6/20/22.
 //  Copyright © 2022 Emerson Malca. All rights reserved.
 //

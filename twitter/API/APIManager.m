@@ -10,16 +10,18 @@
 #import "Tweet.h"
 #import "User.h"
 
-static NSString * const baseURLString = @"https://api.twitter.com";
-
+static NSString * const baseURLString = @"https://api.twitter.com"; //Base url for every api endpoint
 
 @interface APIManager()
+
 @property (nonatomic, strong) NSArray *arrayOfTweets;
+
 @end
 
 @implementation APIManager
 
 + (instancetype)shared {
+//    One APIManager is shared for all the application
     static APIManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -29,7 +31,6 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (instancetype)init {
-    
     NSURL *baseURL = [NSURL URLWithString:baseURLString];
     
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
@@ -53,7 +54,7 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
-    
+//    Endpoint that gets the home timeline
     [self GET:@"1.1/statuses/home_timeline.json"
        parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
            // Success
@@ -67,10 +68,10 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)getUserInfo:(void (^)(User *user, NSError *error))completion{
+//    Endpoint that gets the logged user info
     [self GET:@"1.1/account/verify_credentials.json"
        parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
            // Success
-        
         User *user = [[User alloc] initWithDictionary:userDictionary];
            completion(user, nil);
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -80,9 +81,9 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)postStatusWithText:(NSString *)text completion:(void(^)(Tweet *tweet, NSError *error))completion {
+//    Endpoint to post a tweet
     NSString *urlString = @"1.1/statuses/update.json";
     NSDictionary *parameters = @{@"status": text};
-    
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);
@@ -92,7 +93,7 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
-
+//  Endpoint to favorite a tweet
     NSString *urlString = @"1.1/favorites/create.json";
     NSDictionary *parameters = @{@"id": tweet.idStr};
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
@@ -104,7 +105,7 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
-
+//  Endpoint to unfavorite a tweet
     NSString *urlString = @"1.1/favorites/destroy.json";
     NSDictionary *parameters = @{@"id": tweet.idStr};
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
@@ -116,7 +117,7 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
-
+//  Endpoint to retweet a tweet
     NSString *urlWithoutID = @"1.1/statuses/retweet/";
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@", urlWithoutID, tweet.idStr, @".json"];
     NSDictionary *parameters = @{@"id": tweet.idStr};
@@ -129,7 +130,7 @@ static NSString * const baseURLString = @"https://api.twitter.com";
 }
 
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion {
-    
+//    Endpoint to unretweet a tweet
     NSString *urlWithoutID = @"1.1/statuses/unretweet/";
     NSString *urlString = [NSString stringWithFormat:@"%@%@%@", urlWithoutID, tweet.idStr, @".json"];
     NSDictionary *parameters = @{@"id": tweet.idStr};
