@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TweetCell.h"
 
 @interface TimelineViewController : UIViewController
 
 @property (strong, nonatomic) NSMutableArray* tweetsArray;
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user;
 
 @end

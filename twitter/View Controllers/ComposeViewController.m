@@ -11,8 +11,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+AFNetworking.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *_tweetHere;
 @property (weak, nonatomic) IBOutlet UITextView *_tweetTextContent;
 @property (weak, nonatomic) IBOutlet UIImageView *_profilePicture;
 
@@ -27,6 +28,11 @@
     self._tweetTextContent.layer.borderColor = [[UIColor lightGrayColor] CGColor];
 //    Initialize the profile picture of the user thats signed in
     [self _setupProfilePicture];
+    self._tweetTextContent.delegate=self;
+}
+
+- (void)textViewDidChange:(UITextView *)textView{
+    self._tweetHere.hidden=(textView.text.length>0);
 }
 
 - (void)_setupProfilePicture{

@@ -11,12 +11,13 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "DetailsViewController.h"
+#import "ProfileViewController.h"
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, DetailsViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, DetailsViewControllerDelegate, TweetCellDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *_tableView;
 
@@ -83,6 +84,7 @@
 //    get the tweet and assign it to the cell
     Tweet *tweet = self.tweetsArray[indexPath.row];
     cell.tweet=tweet;
+    cell.delegate = self;
     return cell;
 }
 
@@ -117,6 +119,9 @@
     [self._tableView reloadData];
 }
 
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -138,6 +143,14 @@
 //        Assign delegate and tweet of the destination vc
         detailVC.delegate = self;
         detailVC.tweet = tweetToPass;
+    }
+    else if ([segue.identifier isEqual:@"profileSegue"]){
+//        Case when the segue is to the profile view (profile picture is pressed)
+        UINavigationController *navigationController = [segue destinationViewController];
+        ProfileViewController *profileVC = (ProfileViewController*)navigationController.topViewController;
+        User *userToPass = sender;
+        profileVC.user = userToPass;
+        
     }
 }
 

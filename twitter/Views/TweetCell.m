@@ -16,6 +16,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+//    Create picture gesture recognizer
+    [self _pictureGestureRecognizer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -139,6 +141,17 @@
     _tweet = tweet;
     [self _refreshData];
 };
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate tweetCell:self didTap:self.tweet.user];
+}
+
+- (void)_pictureGestureRecognizer{
+//    Method to set up a tap gesture recognizer for the profile picture
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profilePicture addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profilePicture setUserInteractionEnabled:YES];
+}
 
 @end
 
