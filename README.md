@@ -31,8 +31,8 @@ The following **stretch** features are implemented:
 - [x] Click on a Profile image to reveal another user's profile page, including:
   - Header view: picture and tagline
   - Basic stats: #tweets, #following, #followers
+- [x] See embedded media in Tweets that contain images or videos
 - [ ] Click on links that appear in Tweets
-- [ ] See embedded media in Tweets that contain images or videos
 - [ ] Reply to any Tweet (**2 points**)
   - Replies should be prefixed with the username
   - The `reply_id` should be set when posting the tweet
