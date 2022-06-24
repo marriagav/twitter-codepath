@@ -96,10 +96,44 @@
     }
 }
 
+- (UIImage *)_imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (void)_setImagesOnTweets{
+    if (self.tweet.entities.media){
+        NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+        NSURL *url = [NSURL URLWithString:self.tweet.entities.media[0][@"media_url_https"]];
+        UIImage *image=nil;
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        image = [UIImage imageWithData:urlData];
+        UIImage *myImage = [self _imageWithImage:image scaledToSize:CGSizeMake(250, 250)];
+        attachment.image = myImage;
+
+        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+
+        NSMutableAttributedString *finalString= [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\r", self.tweet.text]];
+        
+        [finalString appendAttributedString:attachmentString];
+
+        self.contentOutlet.attributedText = finalString;
+    }
+    else{
+        self.contentOutlet.text = self.tweet.text;
+    }
+}
+
 - (void)_refreshData{
 //    Method to update the outlets according to tweet on twitter database
     self.nameOutlet.text = self.tweet.user.name;
-    self.contentOutlet.text = self.tweet.text;
+    [self _setImagesOnTweets];
     self.usernameOutlet.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.user.screenName];
 //  The date is formatted
     NSDate *date = self.tweet.createdAtDate;

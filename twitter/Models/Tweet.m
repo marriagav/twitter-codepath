@@ -29,6 +29,10 @@
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
+        
+//        initialize entities
+        NSDictionary *entities = dictionary[@"entities"];
+        self.entities = [[Entities alloc] initWithDictionary:entities];
 
         // initialize user
         NSDictionary *user = dictionary[@"user"];

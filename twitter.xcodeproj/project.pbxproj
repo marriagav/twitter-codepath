@@ -25,6 +25,7 @@
 		D463EFC2286435B200E9F2CD /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D463EFC1286435B200E9F2CD /* DetailsViewController.m */; };
 		D463EFC5286512CE00E9F2CD /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D463EFC4286512CE00E9F2CD /* ProfileViewController.m */; };
 		D463EFC82866531C00E9F2CD /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = D463EFC72866531C00E9F2CD /* InfiniteScrollActivityView.m */; };
+		D463EFCC286661A600E9F2CD /* Entities.m in Sources */ = {isa = PBXBuildFile; fileRef = D463EFCB286661A600E9F2CD /* Entities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		D463EFC4286512CE00E9F2CD /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		D463EFC62866531C00E9F2CD /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
 		D463EFC72866531C00E9F2CD /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
+		D463EFCA286661A600E9F2CD /* Entities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entities.h; sourceTree = "<group>"; };
+		D463EFCB286661A600E9F2CD /* Entities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Entities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 				D463EFB52861312300E9F2CD /* User.m */,
 				D463EFB7286131FB00E9F2CD /* Tweet.h */,
 				D463EFB8286131FB00E9F2CD /* Tweet.m */,
+				D463EFCA286661A600E9F2CD /* Entities.h */,
+				D463EFCB286661A600E9F2CD /* Entities.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
 				D463EFC5286512CE00E9F2CD /* ProfileViewController.m in Sources */,
+				D463EFCC286661A600E9F2CD /* Entities.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
