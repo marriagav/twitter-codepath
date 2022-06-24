@@ -70,7 +70,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="892"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="113" id="bf5-26-xIX" customClass="TweetCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="113" id="bf5-26-xIX" customClass="TweetCell">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bf5-26-xIX" id="2y2-yR-Mco">
@@ -466,7 +466,7 @@
                                 <rect key="frame" x="0.0" y="393" width="428" height="499"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="113" id="knT-ew-8F9" customClass="TweetCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="113" id="knT-ew-8F9" customClass="TweetCell">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="knT-ew-8F9" id="xAM-Hb-jEF">
@@ -656,6 +656,7 @@
                             <constraint firstItem="lv3-tJ-KOe" firstAttribute="bottom" secondItem="KNd-R6-MlC" secondAttribute="bottom" id="N81-I0-3U6"/>
                             <constraint firstItem="KNd-R6-MlC" firstAttribute="trailing" secondItem="Zda-3m-Uop" secondAttribute="trailing" constant="20" id="SCS-or-QeW"/>
                             <constraint firstItem="75X-k8-5Kn" firstAttribute="centerX" secondItem="HAR-5u-S4U" secondAttribute="centerX" id="SXP-sN-0Xp"/>
+                            <constraint firstItem="9Os-hG-ShW" firstAttribute="top" secondItem="KNd-R6-MlC" secondAttribute="top" constant="5" id="SbA-bz-4Po"/>
                             <constraint firstItem="NKr-Qi-7Kq" firstAttribute="top" secondItem="Zda-3m-Uop" secondAttribute="bottom" constant="7.6699999999999999" id="Stk-FZ-TPk"/>
                             <constraint firstItem="sje-zR-N6O" firstAttribute="centerX" secondItem="HAR-5u-S4U" secondAttribute="centerX" id="TCV-jR-6qR"/>
                             <constraint firstItem="9Os-hG-ShW" firstAttribute="top" secondItem="KNd-R6-MlC" secondAttribute="top" constant="5" id="TZI-0d-Tdt"/>
