@@ -33,12 +33,8 @@
     return newImage;
 }
 
-- (void)_refreshData{
-//    This method updates the tweet data on the outlets of the view
-    self.nameOutlet.text = self.tweet.user.name;
+- (void)_setImagesOnTweets{
     if (self.tweet.entities.media){
-        self.contentOutlet.text = self.tweet.text;
-
         NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
         NSURL *url = [NSURL URLWithString:self.tweet.entities.media[0][@"media_url_https"]];
         UIImage *image=nil;
@@ -58,6 +54,12 @@
     else{
         self.contentOutlet.text = self.tweet.text;
     }
+}
+
+- (void)_refreshData{
+//    This method updates the tweet data on the outlets of the view
+    self.nameOutlet.text = self.tweet.user.name;
+    [self _setImagesOnTweets];
     self.usernameOutlet.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.user.screenName];
     self.dateOutlet.text = self.tweet.createdAtString;
 //  Set up the profile picture correctly

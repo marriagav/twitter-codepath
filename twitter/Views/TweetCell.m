@@ -107,13 +107,8 @@
     return newImage;
 }
 
-- (void)_refreshData{
-//    Method to update the outlets according to tweet on twitter database
-    self.nameOutlet.text = self.tweet.user.name;
-    
+- (void)_setImagesOnTweets{
     if (self.tweet.entities.media){
-        self.contentOutlet.text = self.tweet.text;
-
         NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
         NSURL *url = [NSURL URLWithString:self.tweet.entities.media[0][@"media_url_https"]];
         UIImage *image=nil;
@@ -133,7 +128,12 @@
     else{
         self.contentOutlet.text = self.tweet.text;
     }
-    
+}
+
+- (void)_refreshData{
+//    Method to update the outlets according to tweet on twitter database
+    self.nameOutlet.text = self.tweet.user.name;
+    [self _setImagesOnTweets];
     self.usernameOutlet.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.user.screenName];
 //  The date is formatted
     NSDate *date = self.tweet.createdAtDate;
