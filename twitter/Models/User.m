@@ -17,9 +17,10 @@
         self.name = dictionary[@"name"];
         self.screenName = dictionary[@"screen_name"];
         self.profilePicture = dictionary[@"profile_image_url_https"];
-        self.amountOfFollowers = dictionary[@"followers_count"];
+        self.amountOfFollowers = [dictionary[@"followers_count"] intValue];
         self.bioDescription = dictionary[@"description"];
-        self.amountOfFollowing = dictionary[@"friends_count"];
+        self.amountOfFollowing = [dictionary[@"friends_count"] intValue];
+        self.userID = [dictionary[@"id"] intValue];
         
     }
     return self;

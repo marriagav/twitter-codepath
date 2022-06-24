@@ -24,8 +24,10 @@
     self.profileName.text = self.user.name;
     self.profileUsername.text = [NSString stringWithFormat:@"%@%@", @"@", self.user.screenName];
     self.bio.text = self.user.bioDescription;
-//    self.followersAmount.text = self.user.amountOfFollowers;
-//    self.followingAmount.text = self.user.amountOfFollowing;
+    NSString* followersString = [NSString stringWithFormat:@"%i", self.user.amountOfFollowers];
+    NSString* followingString = [NSString stringWithFormat:@"%i", self.user.amountOfFollowing];
+    self.followersAmount.text = followersString;
+    self.followingAmount.text = followingString;
 //  Set the profile picture
     self.profilePicture.image = nil;
         if (self.user.profilePicture != nil) {
@@ -37,6 +39,10 @@
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height/2;
     self.profilePicture.layer.borderWidth = 0;
     self.profilePicture.clipsToBounds=YES;
+}
+
+- (IBAction)closeTab:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 @end
