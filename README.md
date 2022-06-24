@@ -26,16 +26,16 @@ The following **stretch** features are implemented:
 **A user could**
 
 - [x] Be able to **unlike** or **un-retweet** by tapping a liked or retweeted Tweet button, respectively. (Doing so will decrement the count for each)
+- [x] See a character count when composing a Tweet (as well as a warning) (280 characters) (**1 point**)
+- [x] Load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client
+- [x] Click on a Profile image to reveal another user's profile page, including:
+  - Header view: picture and tagline
+  - Basic stats: #tweets, #following, #followers
 - [ ] Click on links that appear in Tweets
 - [ ] See embedded media in Tweets that contain images or videos
 - [ ] Reply to any Tweet (**2 points**)
   - Replies should be prefixed with the username
   - The `reply_id` should be set when posting the tweet
-- [x] See a character count when composing a Tweet (as well as a warning) (280 characters) (**1 point**)
-- [ ] Load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client
-- [x] Click on a Profile image to reveal another user's profile page, including:
-  - Header view: picture and tagline
-  - Basic stats: #tweets, #following, #followers
 - [ ] Switch between **timeline**, **mentions**, or **profile view** through a tab bar (**3 points**)
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
@@ -43,6 +43,7 @@ The following **additional** features are implemented:
 - A placeholder text for the compose view
 - User timeline appears on their profile page
 - User profile picture displays on compose tweet view
+- Scroll View animation for loading more tweets
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
