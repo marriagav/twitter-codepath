@@ -16,6 +16,7 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
+#import "InfiniteScrollActivityView.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, DetailsViewControllerDelegate, TweetCellDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -25,6 +26,9 @@
 @end
 
 @implementation TimelineViewController
+
+bool _isMoreDataLoading = false;
+InfiniteScrollActivityView* _loadingMoreView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +40,7 @@
     // Initialize a UIRefreshControl
     [self _initializeRefreshControl];
     // Initialize a UIRefreshControlBottom
-//    [self _initializeRefreshControlB];
+    [self _initializeRefreshControlB];
 }
 
 - (void)_getTimeline{
@@ -60,12 +64,18 @@
     [self._tableView insertSubview:refreshControl atIndex:0];
 }
 
-//- (void)_initializeRefreshControlB{
-////    Initialices and inserts the refresh control
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-////    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-//    [self._tableView insertSubview:refreshControl atIndex:self.tweetsArray.count];
-//}
+- (void)_initializeRefreshControlB{
+//    Initialices and inserts the refresh control
+    // Set up Infinite Scroll loading indicator
+    CGRect frame = CGRectMake(0, self._tableView.contentSize.height, self._tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    _loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    _loadingMoreView.hidden = true;
+    [self._tableView addSubview:_loadingMoreView];
+    
+    UIEdgeInsets insets = self._tableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self._tableView.contentInset = insets;
+}
 
 - (IBAction)didTapLogout:(id)sender {
 //  Method gets called when the user presses logout button, logging the user out and returning to login screen
@@ -140,13 +150,21 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(!self._isMoreDataLoading){
+    if(!_isMoreDataLoading){
             // Calculate the position of one screen length before the bottom of the results
             int scrollViewContentHeight = self._tableView.contentSize.height;
             int scrollOffsetThreshold = scrollViewContentHeight - self._tableView.bounds.size.height;
+            
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && self._tableView.isDragging) {
-                self._isMoreDataLoading = true;
+                _isMoreDataLoading = true;
+                
+                // Update position of loadingMoreView, and start loading indicator
+                CGRect frame = CGRectMake(0, self._tableView.contentSize.height, self._tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+                _loadingMoreView.frame = frame;
+                [_loadingMoreView startAnimating];
+                
+                // Code to load more results
                 [self loadMoreData];
             }
         }
@@ -164,6 +182,7 @@
 //            error
             NSLog(@"Error getting home timeline: %@", error.localizedDescription);
         }
+        [_loadingMoreView stopAnimating];
     }];
 }
 
