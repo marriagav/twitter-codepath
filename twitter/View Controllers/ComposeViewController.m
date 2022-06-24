@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *_tweetHere;
 @property (weak, nonatomic) IBOutlet UITextView *_tweetTextContent;
 @property (weak, nonatomic) IBOutlet UIImageView *_profilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *_wordCount;
 
 @end
 
@@ -29,6 +30,7 @@
 //    Initialize the profile picture of the user thats signed in
     [self _setupProfilePicture];
     self._tweetTextContent.delegate=self;
+    self._tweetTextContent.delegate = self;
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
@@ -79,6 +81,20 @@
                 NSLog(@"Error posting tweet: %@", error.localizedDescription);
             }
     }];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    // Set the max character limit
+    int characterLimit = 280;
+
+    // Construct what the new text would be if we allowed the user's latest edit
+    NSString *newText = [self._tweetTextContent.text stringByReplacingCharactersInRange:range withString:text];
+
+    // Update character count label
+    self._wordCount.text = [NSString stringWithFormat:@"%@/%@", [NSString stringWithFormat:@"%lu", (unsigned long)newText.length], @"280"];
+
+    // Should the new text should be allowed? True/False
+    return newText.length < characterLimit;
 }
 
 @end
