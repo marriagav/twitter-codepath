@@ -47,8 +47,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Better ways to implement infinite scrolling without having to make so many API calls.
+2. Better way to embed pictures on the tableview cells.
 
 ## Video Walkthrough
 
@@ -61,7 +61,8 @@ GIF created with [Kap](https://getkap.co/).
 ## Notes
 
 Describe any challenges encountered while building the app.
-- 
+- Encountered a problem in which images where taking too much space of the tweetcells.
+- Encountered a problem in which the app was not retriving information from the user correctly, managed to solve it by taking a deeper look into the twitter API documentation and calling more endpoints from the api manager.
 
 ## Credits
 
