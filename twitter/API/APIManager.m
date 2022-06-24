@@ -67,6 +67,22 @@ static NSString * const baseURLString = @"https://api.twitter.com"; //Base url f
     }];
 }
 
+- (void)getHomeTimelineXAmount:(int)numberOfTweets completion: (void(^)(NSArray *tweets, NSError *error))completion {
+//    Endpoint that gets the home timeline
+    NSString *urlWithoutID = @"1.1/statuses/home_timeline.json?count=";
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", urlWithoutID, [NSString stringWithFormat:@"%d", numberOfTweets]];
+    [self GET:urlString
+       parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+           // Success
+           NSMutableArray *tweets = [Tweet tweetsWithArray:tweetDictionaries];
+           completion(tweets, nil);
+           self.arrayOfTweets = tweets;
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+    }];
+}
+
 - (void)getUserTimeline:(User *)user completion: (void (^)(NSArray *tweets, NSError *error))completion {
 //    Endpoint that gets the user timeline
     NSString *urlWithoutID = @"1.1/statuses/user_timeline.json?screen_name=";
