@@ -8,8 +8,11 @@
 
 #import "ProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
+#import "tweetCell.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *_tableView;
 
 @end
 
@@ -17,7 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//  Initiallize delegate and datasource of the tableview to self
+    self._tableView.dataSource=self;
+    self._tableView.delegate=self;
     [self _setOutlets];
+    [self _getUserTimeline];
 }
 
 - (void)_setOutlets {
@@ -43,6 +50,37 @@
 
 - (IBAction)closeTab:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)_getUserTimeline{
+//    Retrieves tweets from the api
+    [[APIManager shared] getUserTimeline:self.user completion:^(NSArray *tweets, NSError *error){
+        if (tweets) {
+//            Tweets retrieves succesfully
+            self.tweetsArray = (NSMutableArray *)tweets;
+            [self._tableView reloadData];
+        } else {
+//            Error
+            NSLog(@"Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
+    (NSInteger)section{
+//    return amount of tweets in the tweetArray
+        return self.tweetsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:
+    (NSIndexPath *)indexPath{
+//    initialize cell (TweetCell) to a reusable cell using the TweetCell identifier
+    TweetCell *cell = [tableView
+    dequeueReusableCellWithIdentifier: @"TweetCell"];
+//    get the tweet and assign it to the cell
+    Tweet *tweet = self.tweetsArray[indexPath.row];
+    cell.tweet=tweet;
+    return cell;
 }
 
 @end

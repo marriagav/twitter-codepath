@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *followingAmount;
 @property (weak, nonatomic) IBOutlet UILabel *followersAmount;
 @property (weak, nonatomic) IBOutlet UILabel *bio;
+@property (nonatomic, strong) NSArray *tweetsArray;
 
 @end
 

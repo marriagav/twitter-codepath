@@ -67,6 +67,22 @@ static NSString * const baseURLString = @"https://api.twitter.com"; //Base url f
     }];
 }
 
+- (void)getUserTimeline:(User *)user completion: (void (^)(NSArray *tweets, NSError *error))completion {
+//    Endpoint that gets the user timeline
+    NSString *urlWithoutID = @"1.1/statuses/user_timeline.json?screen_name=";
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", urlWithoutID, user.screenName];
+    [self GET:urlString
+       parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+           // Success
+           NSMutableArray *tweets = [Tweet tweetsWithArray:tweetDictionaries];
+           completion(tweets, nil);
+           self.arrayOfTweets = tweets;
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+    }];
+}
+
 - (void)getUserInfo:(void (^)(User *user, NSError *error))completion{
 //    Endpoint that gets the logged user info
     [self GET:@"1.1/account/verify_credentials.json"

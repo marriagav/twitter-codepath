@@ -674,6 +674,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="_tableView" destination="lv3-tJ-KOe" id="tFw-I7-hdW"/>
                         <outlet property="bio" destination="Zda-3m-Uop" id="Qrg-lI-QhC"/>
                         <outlet property="followersAmount" destination="NKr-Qi-7Kq" id="1TH-km-pDn"/>
                         <outlet property="followingAmount" destination="htG-kj-rTc" id="Bxs-nF-UxU"/>
